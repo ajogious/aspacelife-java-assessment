@@ -24,13 +24,9 @@ public class PostService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // It fetch posts from external API asynchronously
+    // This fetch posts from external API asynchronously
     public CompletableFuture<List<Post>> fetchPosts(int count) {
         return CompletableFuture.supplyAsync(() -> {
-            // This runs in a separate thread
-            System.out.println("Fetching posts from API in thread: " +
-                    Thread.currentThread().getName());
-
             // Calling external API
             Post[] posts = restTemplate.getForObject(API_URL, Post[].class);
 
@@ -43,27 +39,19 @@ public class PostService {
 
     // Fetching posts and save to database
     public void batchInsert(int postNumber) throws Exception {
-        System.out.println("Starting batch insert for " + postNumber + " posts");
-
         // Fetching posts asynchronously
         CompletableFuture<List<Post>> future = fetchPosts(postNumber);
 
         // Waiting for the result and then save to database
         List<Post> posts = future.get();
 
-        System.out.println("Fetched " + posts.size() + " posts, saving to database...");
-
         // Saving all posts at once
         postRepository.saveAll(posts);
 
-        System.out.println("Successfully saved " + posts.size() + " posts!");
     }
-
 
     /// Fetching records from database in pagination
     public Page<Post> fetchRecords(int page, int size) {
-        System.out.println("Fetching page " + page + " with size " + size);
-
         // Create pageable object
         Pageable pageable = PageRequest.of(page, size);
 
