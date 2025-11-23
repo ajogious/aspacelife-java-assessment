@@ -10,10 +10,10 @@ import lombok.*;
 @AllArgsConstructor
 public class Post {
 
-    private int userId;
+    private Integer userId;
 
     @Id
-    private int id;
+    private Integer id;
 
     private String title;
 
