@@ -139,13 +139,13 @@ Body: {"postNumber": 24}
 ### Test 2: Fetch Page 1
 
 ```
-GET http://localhost:8080/api/batch_insert?page=0&size=10
+GET http://localhost:8080/api/fetch_record?page=0&size=10
 ```
 
 ### Test 3: Fetch Page 2
 
 ```
-GET http://localhost:8080/api/batch_insert?page=1&size=10
+GET http://localhost:8080/api/fetch_record?page=1&size=10
 ```
 
 ---
